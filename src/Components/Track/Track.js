@@ -1,21 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import "./Track.css";
 
 export class Track extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.isRemoval =  true;
+    }
+
     renderAction() {
-        return <button className='Track-action'>{this.isRemoval ? '-' : '+'}</button>;
+        return this.isRemoval ? '-' : '+';
     }
 
     render() {
         return (
             <div className="Track">
             <div className="Track-information">
-                <h3>{/*track name will go here*/}</h3>
-                <p>{/*track artist will go here*/} | {/*track album will go here*/}</p>
+                <h3>{this.props.name}</h3>
+                <p>{this.props.artist} | {this.props.album}</p>
             </div>
-            <button className="Track-action">{/*+ or - will go here*/}</button>
+            <button className="Track-action">{this.renderAction()}</button>
             </div>
         );
     }
