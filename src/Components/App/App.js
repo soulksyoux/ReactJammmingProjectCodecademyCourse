@@ -25,6 +25,8 @@ class App extends React.Component {
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
+    this.search = this.search.bind(this);
   }
 
   addTrack(track) {
@@ -49,6 +51,17 @@ class App extends React.Component {
     });
   }
 
+  savePlaylist() {
+    //Generates an array of uri values called trackURIs from the playlistTracks property.
+    let trackURIs = [];
+    //In a later step, you will pass the trackURIs array and playlistName to a method that will save the user’s playlist to their account.
+  }
+
+  search(term) {
+    console.log(term);
+  }
+
+
   componentDidMount() {
     //this.addTrack({name: "pl-teste4", artist: "pl-teste4", album: "pl-teste4", id: "4"}); 
   }
@@ -63,10 +76,10 @@ class App extends React.Component {
       <div>
         <h1>Ja<span class="highlight">mmm</span>ing</h1>
         <div className="App">
-          <SearchBar />
+          <SearchBar onSearch={this.search} />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
-            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack} onNameChange={this.updatePlaylistName} />
+            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack} onNameChange={this.updatePlaylistName} onSave={this.savePlaylist} />
           </div>
         </div>
       </div>
