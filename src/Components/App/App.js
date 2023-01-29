@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchResults } from '../SearchResults/SearchResults';
 import { Playlist } from '../Playlist/Playlist';
+import Spotify from '../../util/Spotify';
 
 class App extends React.Component {
 
@@ -27,6 +28,8 @@ class App extends React.Component {
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
+
+    Spotify.getAccessToken();
   }
 
   addTrack(track) {
