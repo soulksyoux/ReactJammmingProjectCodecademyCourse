@@ -11,11 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: [
-        {name: "teste", artist: "teste", album: "teste", id: "4"},
-        {name: "teste2", artist: "teste2", album: "teste2", id: "5"},
-        {name: "teste3", artist: "teste3", album: "teste3", id: "6"},
-      ],
+      searchResults: [],
       playlistName: "Custom playlist",
       playlistTracks: [
         {name: "pl-teste", artist: "pl-teste", album: "pl-teste", id: "1"},
@@ -29,7 +25,7 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
 
-    Spotify.getAccessToken();
+
   }
 
   addTrack(track) {
@@ -61,7 +57,11 @@ class App extends React.Component {
   }
 
   search(term) {
-    console.log(term);
+    Spotify.search(term).then(results => {
+      this.setState({
+        searchResults: results
+      })
+    })
   }
 
 

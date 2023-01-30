@@ -1,4 +1,4 @@
-# App in react related with course of Fullstack from Codecademy
+# App (Jammming) in react related with course of Fullstack from Codecademy
 * Class components
 * Passing data from parent do child components
 * Passing data from child to parent
