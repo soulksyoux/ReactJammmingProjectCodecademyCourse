@@ -1,6 +1,5 @@
 import './App.css';
 import React from "react";
-import ReactDOM from "react-dom";
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchResults } from '../SearchResults/SearchResults';
 import { Playlist } from '../Playlist/Playlist';
@@ -13,11 +12,7 @@ class App extends React.Component {
     this.state = {
       searchResults: [],
       playlistName: "Custom playlist",
-      playlistTracks: [
-        {name: "pl-teste", artist: "pl-teste", album: "pl-teste", id: "1"},
-        {name: "pl-teste2", artist: "pl-teste2", album: "pl-teste2", id: "2"},
-        {name: "pl-teste3", artist: "pl-teste3", album: "pl-teste3", id: "3"},
-      ]
+      playlistTracks: []
     };
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -25,7 +20,8 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
 
-
+    Spotify.savePlaylist("Soulk Playlist Test", [1]);
+    //console.log("CONSTRUCTOR de APP");
   }
 
   addTrack(track) {
@@ -90,7 +86,6 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
 
 export default App;
 
