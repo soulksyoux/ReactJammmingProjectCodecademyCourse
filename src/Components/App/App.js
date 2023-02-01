@@ -19,9 +19,6 @@ class App extends React.Component {
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
-
-    Spotify.savePlaylist("Soulk Playlist Test", [1]);
-    //console.log("CONSTRUCTOR de APP");
   }
 
   addTrack(track) {
@@ -47,9 +44,12 @@ class App extends React.Component {
   }
 
   savePlaylist() {
-    //Generates an array of uri values called trackURIs from the playlistTracks property.
-    let trackURIs = [];
-    //In a later step, you will pass the trackURIs array and playlistName to a method that will save the user’s playlist to their account.
+    let trackURIs = this.state.playlistTracks.map(track => track.uri);
+    Spotify.savePlaylist("AGP 2023 Playlist 1", trackURIs);
+    this.setState({
+      playlistName: "",
+      playlistTracks: []
+    });
   }
 
   search(term) {
@@ -58,15 +58,6 @@ class App extends React.Component {
         searchResults: results
       })
     })
-  }
-
-
-  componentDidMount() {
-    //this.addTrack({name: "pl-teste4", artist: "pl-teste4", album: "pl-teste4", id: "4"}); 
-  }
-
-  componentDidUpdate() {
-    console.log(this.state.playlistTracks);
   }
 
 
