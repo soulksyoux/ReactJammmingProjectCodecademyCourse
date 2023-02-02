@@ -1,0 +1,12 @@
+.btn-pl-item {
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.btn-pl-item:hover {
+    color: gray;
+}

@@ -126,7 +126,56 @@ const Spotify = {
         }catch(error) {
             console.log(error);
         }
+    },
 
+    async getPlaylistsFromUser() {
+
+        const token = this.getAccessToken();
+
+        let userId;
+
+        try {
+            const response = await fetch("https://api.spotify.com/v1/me", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+            if(response.ok) {
+                const jsonResponse = await response.json();
+                userId = jsonResponse.id;
+            }
+
+        }catch(error) {
+            console.log(error);
+        }
+
+        try{
+            const response = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+                headers: { 
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}` 
+                }
+              });
+            if(response.ok) {
+                const jsonResponse = await response.json();
+                if(!jsonResponse.items) {
+                    return [];
+                }else{
+                    return jsonResponse.items.map(playlist => ({
+                            id: playlist.id,
+                            name: playlist.name,
+                         })
+                    );
+                }
+            }else{
+                throw new Error("Request failded");
+            }
+
+        }
+        catch(error) {
+            console.log(error);
+        }
     }
 }
 
