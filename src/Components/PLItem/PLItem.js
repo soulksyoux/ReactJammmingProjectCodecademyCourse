@@ -10,7 +10,7 @@ export class PLItem extends React.Component {
 
 
     handleSelectPlayList() {
-        this.props.onSelectPlayList(this.props.playlist.id);
+        this.props.onSelectPlayList(this.props.playlist.id, this.props.playlist.name);
     }
 
 

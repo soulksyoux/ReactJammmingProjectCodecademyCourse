@@ -65,8 +65,12 @@ class App extends React.Component {
   }
 
   
-  async selectPlayList(playlistid) {
-    console.log(playlistid);
+  async selectPlayList(playlistid, playlistName) {
+    const tracks = await Spotify.getPlaylistTracks(playlistid);  
+    this.setState({
+      playlistName: playlistName,
+      playlistTracks: tracks
+    });
   }
 
 

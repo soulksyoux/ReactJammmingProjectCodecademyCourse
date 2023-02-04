@@ -176,6 +176,44 @@ const Spotify = {
         catch(error) {
             console.log(error);
         }
+    },
+
+    async getPlaylistTracks(playlistId) {
+        if(!playlistId) {
+            return;
+        }
+
+        const token = this.getAccessToken();
+
+        try {
+            const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+                headers: { 
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}` 
+                }
+            });
+            if(response.ok) {
+                const jsonResponse = await response.json();
+                if(!jsonResponse.items) {
+                    return [];
+                }else{
+                    console.log(jsonResponse);
+                    return jsonResponse.items.map(item => ({
+                            id: item.track.id,
+                            name: item.track.name,
+                            artist: item.track.artists[0].name,
+                            album: item.track.album.name,
+                            uri: item.track.uri
+                        })
+                    );
+                }
+            }else{
+                throw new Error("Request failed");
+            }
+        } catch(error) {
+            console.log(error);
+        }
     }
 }
 
